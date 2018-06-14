@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hello,frind^_^</title>
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="/static/css/awesome/font-awesome.css" rel="stylesheet" type="text/css"/>-->
+        <link href="/static/css/fuelux/fuelux.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/css/index.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body background={{url_for('static', filename='background2.png')}}>
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="">心情日记</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/eNote">Home</a></li>
+                <li><a href="happy">好心情</a></li>
+                <li><a href="start">坏心情</a></li>
+
+            </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="login">登录/注册</a></li>
+                <li><a href="logout">注销</a></li>
+                <li><a href="one">日记</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+        <br><br><br>
+
+        <form action="one" method="get"></form>
+        <div align="center">
+            <img src="{{ url_for('static', filename='be_happy.jpg') }}" alt="心情图片" widt ="500" high="250">
+            <br><br>
+            <p><font size="5" face="arial">
+                {% for line in history %}
+                {{ line }}<br>
+                {% endfor %}
+            </font></p>
+            <br><br>
+
+            <form action="online" method="get">
+                <div class="steps-container text-center">
+                    <input type="submit" align="center" name="submit" value="返回" class="btn btn-primary btn-next">
+                </div>
+
+            </form>
+        </div>
+
+    </body>
+</html>

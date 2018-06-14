@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+            <meta name="description" content="">
+            <meta name="author" content="">
+
+        <title>Hello,friends!</title>
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="/static/css/awesome/font-awesome.css" rel="stylesheet" type="text/css"/>-->
+        <link href="/static/css/fuelux/fuelux.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/css/index.css" rel="stylesheet" type="text/css"/>
+        <!-- Bootstrap core CSS -->
+
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="/static/css/navbar-fixed-top.css" rel="stylesheet">
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="/static/js/ie-emulation-modes-warning.js"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body background={{url_for('static', filename='background2.png')}}>
+        <!-- Fixed navbar -->
+       <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container">
+           <div class="navbar-header">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+             </button>
+             <a class="navbar-brand" href="">心情日记</a>
+           </div>
+           <div id="navbar" class="navbar-collapse collapse">
+             <ul class="nav navbar-nav">
+               <li><a href="/eNote">Home</a></li>
+               <li><a href="happy">好心情</a></li>
+               <li class="active"><a href="start">坏心情</a></li>
+
+           </ul>
+             <ul class="nav navbar-nav navbar-right">
+               <li><a href="login">登录/注册</a></li>
+               <li><a href="logout">注销</a></li>
+               <li><a href="one">日记</a></li>
+             </ul>
+           </div><!--/.nav-collapse -->
+         </div>
+       </nav>
+       <br><br><br>
+       <div class="container fuelux">
+
+
+    <div id="form_content">
+    <form action="/eNote/write" method="get" >
+
+        <div class="wizard" data-initialize="wizard" id="mood_wizard">
+
+
+
+            <div class="step-content">
+
+                    <!-- 标题头介绍 -->
+                    <div>
+                        <h4 class="margin-lg-left">朋友，先平静下心情，来写一下日记吧O(∩_∩)O</h4>
+                        <h4 class="margin-lg-left">时间：{{date}}</h4>
+                        <h4 class="margin-lg-left">请为自己填写一个昵称：<input type="text" name="name"></h4>
+                    </div>
+                    <!-- 场景选择 -->
+                    <div class="row sel-group">
+                        <div class="col-md-1">
+                            <p class="text-right sel-title">场景</p> <!-- 冒号通过 :after 伪样式实现的 -->
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="radio" name="scenes" value="工作单位">
+                                        工作单位
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="radio" name="scenes" value="学校">
+                                        学校
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="radio" name="scenes" value="家庭">
+                                        家庭
+                                    </label>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="radio" name="scenes" value="others">
+                                        <input type="text" class="form-control" name="scenes" placeholder="某个小角落..." style="width: 80%;">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 对象选择 -->
+                    <div class="row sel-group">
+                        <div class="col-md-1">
+                            <p class="text-right sel-title">对象</p>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row">
+
+
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+
+                                        <input type="text" id="name" name="relationship" class="form-control" placeholder="那个谁谁谁..."
+                                               style="width: 80%;">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 事件 -->
+                    <div class="row sel-group">
+                        <div class="col-md-1">
+                            <p class="text-right sel-title">事件</p>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="event" rows="2" style="margin-bottom: 6px;"></textarea>
+                        </div>
+                    </div>
+                    <!-- 情绪 -->
+                    <div class="row sel-group">
+                        <div class="col-md-1">
+                            <p class="text-right sel-title">情绪和评估</p>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="悲伤">
+                                        悲伤
+                                        <input type="text" id="name" class="form-control" placeholder="百分数..."
+                                               style="width: 55%;">
+
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="愤怒">
+                                        愤怒
+                                        <input type="text" id="name" class="form-control" placeholder="百分数..."
+                                               style="width: 55%;">
+
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="焦虑">
+                                        焦虑
+                                        <input type="text" id="name" class="form-control" placeholder="百分数..."
+                                               style="width: 55%;">
+
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="内疚">
+                                        内疚
+                                        <input type="text" id="name" class="form-control" placeholder="百分数..."
+                                               style="width: 55%;">
+
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="恐惧">
+                                        恐惧
+                                        <input type="text" id="name" class="form-control" placeholder="百分数..."
+                                               style="width: 55%;">
+
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="忧愁">
+                                        忧愁
+                                        <input type="text" id="name" class="form-control" placeholder="百分数..."
+                                               style="width: 55%;">
+
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="mood" value="others">
+                                        <input type="text" id="name" name="mood" class="form-control" placeholder="感觉不咋好..."
+                                               style="width: 80%;">
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 感受 -->
+                    <div class="row sel-group">
+                        <div class="col-md-1">
+                            <p class="text-right sel-title">身体感受</p>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="feel" value="胸闷">
+                                        胸闷
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="feel" value="透不过气来">
+                                        透不过气来
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="feel" value="心很沉重 灰色心情">
+                                        心很沉重 灰色心情
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="idea" value="头晕目眩">
+                                        头晕目眩
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="idea" value="手脚冰凉">
+                                        手脚冰凉
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="idea" value="feel_999">
+                                        <input type="text" id="name" name="idea" class="form-control" placeholder="阿西吧..."
+                                               style="width: 80%;">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row sel-group">
+                        <div class="col-md-12">
+                            <p class="text-left sel-title">排解情绪你要做什么或者已经做了什么</p> <!-- 冒号通过 :after 伪样式实现的 -->
+                        </div>
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="ent" value="购物">
+                                        购物
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="ent" value="运动">
+                                        运动
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="ent" value="狂吃">
+                                        狂吃
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="ent" value="看喜剧">
+                                        看喜剧
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="radio-wraper">
+                                        <input type="checkbox" name="ent" value="others">
+                                        <input type="text" class="form-control" placeholder="..." style="width: 80%;">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div>
+                        <h4 class="margin-lg-left">朋友，下面是调节情绪环节</h4>
+                    </div>
+                    <!-- 排解情绪你要做什么或者已经做了什么？ -->
+
+                    <!-- 情绪背后的原因 -->
+                    <div class="row sel-group">
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-default">
+                              <!-- Default panel contents -->
+                              <div class="panel-heading"><h3>思维决定情绪</h3></div>
+                              <div class="panel-body">
+                                <p>三栏法，让你理智的分析自己的情绪</p>
+                                <a href="http://f2bfa0d3.wiz03.com/share/s/3OLW3j1by4TZ25TyFP1e00tk1uCge00954Dr2Q__2f1ahe_F">不知该怎么填写点这里</a>
+                              </div>
+
+                              <!-- Table -->
+                              <table class="table">
+                                  <tr>
+                                     <td>下意识思维：</td>
+
+                                    <td>1. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        2. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        3. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        4. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        5. <input type="text" name="first" style="width: 80%;"></td>
+
+                                  </tr>
+                                  <tr>
+                                    <td>认知扭曲：</td>
+                                    <td><a href="http://f2bfa0d3.wiz03.com/share/s/3OLW3j1by4TZ25TyFP1e00tk2HOsUW3a243J25StR22hafPS">十大扭曲认知</a><br>
+                                        <input type="checkbox" name="second" value="以偏概全">以偏概全<br>
+                                        <input type="checkbox" name="second" value="非此即彼思维">非此即彼思维<br>
+                                        <input type="checkbox" name="second" value="心里过滤">心里过滤<br>
+                                        <input type="checkbox" name="second" value="否定正面思考">否定正面思考<br>
+                                        <input type="checkbox" name="second" value="妄下结论（读心术）">妄下结论（读心术）<br>
+                                        <input type="checkbox" name="second" value="妄下结论（先知错误）">妄下结论（先知错误）<br>
+                                        <input type="checkbox" name="second" value="放大">放大<br>
+                                        <input type="checkbox" name="second" value="缩小">缩小<br>
+                                        <input type="checkbox" name="second" value="情绪化推理">情绪化推理<br>
+                                        <input type="checkbox" name="second" value="“应该”句式">“应该”句式<br>
+                                        <input type="checkbox" name="second" value="乱贴标签">乱贴标签
+                                    </td>
+
+                                  </tr>
+                                  <tr>
+                                    <td>理性回应：</td>
+                                    <td>1. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        2. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        3. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        4. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        5. <input type="text" name="first" style="width: 80%;"><br><br>
+                                        ————————————————————————————————————————————————————————
+                                    </td>
+
+                                  </tr>
+                              </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="steps-container text-center">
+                        <input type="submit" align="center" name="submit" value="完成" class="btn btn-primary btn-next">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+    </form>
+</div>
+
+</body>
+<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.js"></script>
+<script type="text/javascript" src="/static/js/fuelux/fuelux.js"></script>
+
+
+
+<!-- Bootstrap core JavaScript
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+
+   <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+   <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+</html>
